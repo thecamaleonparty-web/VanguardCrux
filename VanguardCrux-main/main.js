@@ -197,8 +197,7 @@ function setLanguage(lang) {
 
     // Update active state for all language buttons
     document.querySelectorAll('.language-btn').forEach(btn => {
-        const btnLang = btn.getAttribute('onclick')?.match(/setLanguage\('(\w+)'\)/)?.[1];
-        btn.classList.toggle('active', btnLang === lang);
+        btn.classList.toggle('active', btn.dataset.btnLang === lang);
     });
 }
 
