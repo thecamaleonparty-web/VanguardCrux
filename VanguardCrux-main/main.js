@@ -71,10 +71,20 @@ function initProjectSwiper() {
     }
 
     function updateButtons() {
-        prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
-        prevBtn.style.cursor = currentSlide === 0 ? 'not-allowed' : 'pointer';
-        nextBtn.style.opacity = currentSlide === totalSlides - 1 ? '0.5' : '1';
-        nextBtn.style.cursor = currentSlide === totalSlides - 1 ? 'not-allowed' : 'pointer';
+        const isAtStart = currentSlide === 0;
+        const isAtEnd = currentSlide === totalSlides - 1;
+        
+        // Update previous button
+        prevBtn.disabled = isAtStart;
+        prevBtn.style.opacity = isAtStart ? '0.5' : '1';
+        prevBtn.style.cursor = isAtStart ? 'not-allowed' : 'pointer';
+        prevBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
+        
+        // Update next button
+        nextBtn.disabled = isAtEnd;
+        nextBtn.style.opacity = isAtEnd ? '0.5' : '1';
+        nextBtn.style.cursor = isAtEnd ? 'not-allowed' : 'pointer';
+        nextBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
     }
 
     function goToSlide(index) {
@@ -85,15 +95,11 @@ function initProjectSwiper() {
     }
 
     function nextSlide() {
-        if (currentSlide < totalSlides - 1) {
-            goToSlide(currentSlide + 1);
-        }
+        goToSlide(currentSlide + 1);
     }
 
     function prevSlide() {
-        if (currentSlide > 0) {
-            goToSlide(currentSlide - 1);
-        }
+        goToSlide(currentSlide - 1);
     }
 
     // Add click handlers
@@ -414,10 +420,13 @@ function setLanguage(lang) {
 
     // Update language button active states
     document.querySelectorAll('.language-btn').forEach(btn => {
-        const btnText = btn.querySelector('span');
-        if (btnText) {
-            const btnLang = btnText.textContent.toLowerCase();
-            btn.classList.toggle('active', btnLang === lang);
+        // Check if this button's onclick calls setLanguage with the current lang
+        const onclickAttr = btn.getAttribute('onclick');
+        if (onclickAttr) {
+            const match = onclickAttr.match(/setLanguage\('(\w+)'\)/);
+            if (match) {
+                btn.classList.toggle('active', match[1] === lang);
+            }
         }
     });
 }
