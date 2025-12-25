@@ -72,19 +72,6 @@ function initProjectSwiper() {
 }
 
 /* =========================================================
-   UI EFFECTS
-   ========================================================= */
-
-function initRippleEffects() {
-    document.querySelectorAll('.language-btn').forEach(btn => {
-    btn.classList.toggle(
-        'active',
-        btn.dataset.lang === lang
-    );
-});
-}
-
-/* =========================================================
    MOBILE MENU
    ========================================================= */
 
@@ -420,11 +407,15 @@ function setLanguage(lang) {
         btn.classList.remove('active');
     });
     
-    // Find buttons by their onclick attribute
+    // Find buttons by their onclick attribute - extract language code safely
     document.querySelectorAll('.language-btn').forEach(btn => {
         const onclick = btn.getAttribute('onclick');
-        if (onclick && onclick.includes(`'${lang}'`)) {
-            btn.classList.add('active');
+        if (onclick) {
+            // Extract language code from onclick="setLanguage('XX')" pattern
+            const match = onclick.match(/setLanguage\(['"](\w+)['"]\)/);
+            if (match && match[1] === lang) {
+                btn.classList.add('active');
+            }
         }
     });
 }
