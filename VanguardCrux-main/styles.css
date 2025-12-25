@@ -563,45 +563,125 @@ input:focus, textarea:focus {
 .to-blue-400 { --bg-color-to: #60a5fa; }
 .from-green-400 { --bg-color-from: #4ade80; }
 
-/* Swiper */
+/* Swiper Carousel */
 .project-swiper {
     overflow: hidden;
     position: relative;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .swiper-wrapper {
     display: flex;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .swiper-slide {
     flex: 0 0 100%;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
 }
 
 @media (min-width: 768px) {
     .swiper-slide {
         flex: 0 0 50%;
+        padding: 0 1rem;
     }
 }
 
+/* Carousel Card Improvements */
+.swiper-slide > div {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.swiper-slide > div:hover {
+    transform: translateY(-5px);
+    border-color: rgba(100, 255, 218, 0.3);
+    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.15);
+}
+
+/* Enhanced Pagination */
 .swiper-pagination {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
 }
 
 .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(100, 255, 218, 0.3);
+    border: 2px solid transparent;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.swiper-pagination-bullet:hover {
+    background-color: rgba(100, 255, 218, 0.5);
+    transform: scale(1.2);
 }
 
 .swiper-pagination-bullet-active {
     background-color: var(--accent) !important;
+    border-color: rgba(100, 255, 218, 0.3);
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+}
+
+/* Navigation Arrows */
+.swiper-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(17, 34, 64, 0.9);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--accent);
+    font-size: 1.25rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.swiper-nav-btn:hover {
+    background: rgba(100, 255, 218, 0.2);
+    border-color: var(--accent);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+}
+
+.swiper-nav-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.swiper-nav-prev {
+    left: -20px;
+}
+
+.swiper-nav-next {
+    right: -20px;
+}
+
+/* Hide navigation on mobile */
+@media (max-width: 767px) {
+    .swiper-nav-btn {
+        display: none;
+    }
+    
+    .project-swiper {
+        max-width: 100%;
+    }
 }
 
 /* Mobile Hero Text Contrast Improvements */

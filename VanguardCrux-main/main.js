@@ -37,6 +37,8 @@ function initProjectSwiper() {
     const wrapper = swiper.querySelector('.swiper-wrapper');
     const slides = wrapper.querySelectorAll('.swiper-slide');
     const pagination = swiper.querySelector('.swiper-pagination');
+    const prevBtn = swiper.querySelector('.swiper-nav-prev');
+    const nextBtn = swiper.querySelector('.swiper-nav-next');
 
     let currentSlide = 0;
     const totalSlides = slides.length;
@@ -62,11 +64,24 @@ function initProjectSwiper() {
         updatePagination();
     }
 
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        goToSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        goToSlide(currentSlide);
+    }
+
+    // Navigation button event listeners
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
     // Auto-slide SOLO mobile, UNA SOLA VEZ
     if (window.innerWidth < 768) {
         setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            goToSlide(currentSlide);
+            nextSlide();
         }, 5000);
     }
 }
@@ -122,7 +137,12 @@ const translations = {
         navContact: "Contact",
         footerPrivacy: "Privacy Policy",
         footerTerms: "Terms & Conditions",
-        footerCookies: "Cookies Policy"
+        footerCookies: "Cookies Policy",
+        caseStudiesTitle: "Proven Results, Not Promises.",
+        case1Title: "Kultur Atelier, Hamburg",
+        case1Desc: "Developed a cohesive graphic identity to boost the visibility of their cultural events, increasing community engagement through strategic branding.",
+        case2Title: "Tasca do Infante, Porto",
+        case2Desc: "A local performance marketing strategy that increased online bookings by 40% in 3 months through targeted social media ads."
     },
     es: {
         navSolutions: "Servicios",
@@ -132,7 +152,12 @@ const translations = {
         navContact: "Contacto",
         footerPrivacy: "Política de Privacidad",
         footerTerms: "Términos y Condiciones",
-        footerCookies: "Política de Cookies"
+        footerCookies: "Política de Cookies",
+        caseStudiesTitle: "Resultados Probados, No Promesas.",
+        case1Title: "Kultur Atelier, Hamburgo",
+        case1Desc: "Desarrollamos una identidad gráfica coherente para aumentar la visibilidad de sus eventos culturales, incrementando el compromiso de la comunidad a través de branding estratégico.",
+        case2Title: "Tasca do Infante, Oporto",
+        case2Desc: "Una estrategia local de marketing de rendimiento que aumentó las reservas online en un 40% en 3 meses a través de anuncios dirigidos en redes sociales."
     },
     pt: {
         navSolutions: "Serviços",
@@ -142,7 +167,12 @@ const translations = {
         navContact: "Contacto",
         footerPrivacy: "Política de Privacidade",
         footerTerms: "Termos e Condições",
-        footerCookies: "Política de Cookies"
+        footerCookies: "Política de Cookies",
+        caseStudiesTitle: "Resultados Comprovados, Não Promessas.",
+        case1Title: "Kultur Atelier, Hamburgo",
+        case1Desc: "Desenvolvemos uma identidade gráfica coesa para aumentar a visibilidade dos seus eventos culturais, aumentando o envolvimento da comunidade através de branding estratégico.",
+        case2Title: "Tasca do Infante, Porto",
+        case2Desc: "Uma estratégia local de marketing de performance que aumentou as reservas online em 40% em 3 meses através de anúncios direcionados nas redes sociais."
     }
 };
 
@@ -165,8 +195,10 @@ function setLanguage(lang) {
         }
     });
 
+    // Update active state for all language buttons
     document.querySelectorAll('.language-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
+        const btnLang = btn.getAttribute('onclick')?.match(/setLanguage\('(\w+)'\)/)?.[1];
+        btn.classList.toggle('active', btnLang === lang);
     });
 }
 
