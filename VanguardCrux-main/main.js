@@ -309,7 +309,6 @@ const translations = {
         case5Title: "TechStart Hub, Lisboa",
         case5Desc: "Implementamos una estrategia integral de SEO y marketing de contenidos que impulsó un crecimiento del 300% en tráfico orgánico y estableció liderazgo de pensamiento en el ecosistema tecnológico portugués.",
 
-
         // About Section
         aboutTitle: "Pensamos fuera de la caja. Actuamos dentro de tus objetivos.",
         aboutSubtitle: "Nuestra historia es una sin fronteras. Nacidos de la colaboración de expertos digitales en Argentina, desde Paraná hasta Mendoza, nuestro viaje nos ha llevado a desarrollar proyectos en Hamburgo y Dubái, y nos ha conducido a establecer nuestro centro europeo en Oporto.",
