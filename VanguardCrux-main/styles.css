@@ -562,6 +562,12 @@ input:focus, textarea:focus {
 .from-accent { --bg-color-from: var(--accent); }
 .to-blue-400 { --bg-color-to: #60a5fa; }
 .from-green-400 { --bg-color-from: #4ade80; }
+.from-blue-400 { --bg-color-from: #60a5fa; }
+.to-indigo-400 { --bg-color-to: #818cf8; }
+.from-purple-400 { --bg-color-from: #c084fc; }
+.to-pink-400 { --bg-color-to: #f472b6; }
+.from-orange-400 { --bg-color-from: #fb923c; }
+.to-red-400 { --bg-color-to: #f87171; }
 
 /* Swiper */
 .project-swiper {

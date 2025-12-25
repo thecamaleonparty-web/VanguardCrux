@@ -218,6 +218,8 @@ const translations = {
         case3Desc: "Implemented AI-powered chatbot and automation workflows that reduced customer support costs by 60% while improving response times by 85%.",
         case4Title: "Vinos de Bodega, Mendoza",
         case4Desc: "Complete digital transformation with e-commerce platform and content strategy that generated a 250% increase in online sales within 6 months.",
+        case5Title: "TechStart Hub, Lisbon",
+        case5Desc: "Implemented comprehensive SEO and content marketing strategy that drove 300% organic traffic growth and established thought leadership in the Portuguese tech ecosystem.",
 
         // About Section
         aboutTitle: "We think outside the box. We act inside your goals.",
@@ -304,6 +306,9 @@ const translations = {
         case3Desc: "Implementamos chatbot impulsado por IA y flujos de automatización que redujeron los costos de soporte al cliente en un 60% mientras mejoraban los tiempos de respuesta en un 85%.",
         case4Title: "Vinos de Bodega, Mendoza",
         case4Desc: "Transformación digital completa con plataforma de e-commerce y estrategia de contenido que generó un aumento del 250% en ventas online en 6 meses.",
+        case5Title: "TechStart Hub, Lisboa",
+        case5Desc: "Implementamos una estrategia integral de SEO y marketing de contenidos que impulsó un crecimiento del 300% en tráfico orgánico y estableció liderazgo de pensamiento en el ecosistema tecnológico portugués.",
+
 
         // About Section
         aboutTitle: "Pensamos fuera de la caja. Actuamos dentro de tus objetivos.",
@@ -390,6 +395,8 @@ const translations = {
         case3Desc: "Implementámos chatbot impulsionado por IA e fluxos de automatização que reduziram os custos de suporte ao cliente em 60% enquanto melhoravam os tempos de resposta em 85%.",
         case4Title: "Vinos de Bodega, Mendoza",
         case4Desc: "Transformação digital completa com plataforma de e-commerce e estratégia de conteúdo que gerou um aumento de 250% nas vendas online em 6 meses.",
+        case5Title: "TechStart Hub, Lisboa",
+        case5Desc: "Implementámos uma estratégia abrangente de SEO e marketing de conteúdo que impulsionou um crescimento de 300% no tráfego orgânico e estabeleceu liderança de pensamento no ecossistema tecnológico português.",
 
         // About Section
         aboutTitle: "Pensamos fora da caixa. Agimos dentro dos seus objetivos.",
@@ -431,6 +438,92 @@ const translations = {
         footerTerms: "Termos e Condições",
         footerCookies: "Política de Cookies"
     }
+}
+
+/* =========================================================
+   LANGUAGE SWITCHER
+   ========================================================= */
+
+function detectBrowserLanguage() {
+    // Get saved language from localStorage
+    const savedLang = localStorage.getItem('userLanguage');
+    if (savedLang && (savedLang === 'en' || savedLang === 'pt' || savedLang === 'es')) {
+        return savedLang;
+    }
+    
+    // Detect browser language
+    const browserLang = navigator.language || navigator.userLanguage;
+    
+    // Map browser language codes to supported languages
+    if (browserLang.startsWith('pt')) {
+        return 'pt';
+    } else if (browserLang.startsWith('es')) {
+        return 'es';
+    } else {
+        return 'en'; // Default to English
+    }
+}
+
+function setLanguage(lang) {
+    // Validate language
+    if (!['en', 'pt', 'es'].includes(lang)) {
+        lang = 'en';
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('userLanguage', lang);
+    
+    // Update active button state in all language switchers
+    document.querySelectorAll('.language-switcher').forEach(switcher => {
+        switcher.querySelectorAll('.language-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+    });
+    
+    // Add active class to selected language buttons
+    document.querySelectorAll(`.language-btn[onclick*="'${lang}'"]`).forEach(btn => {
+        btn.classList.add('active');
+    });
+    
+    // Apply translations to all elements with data-lang attribute
+    document.querySelectorAll('[data-lang]').forEach(element => {
+        const key = element.getAttribute('data-lang');
+        const translation = translations[lang] && translations[lang][key];
+        
+        if (translation) {
+            // Handle different element types
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                element.placeholder = translation;
+            } else if (element.hasAttribute('data-lang-placeholder')) {
+                element.placeholder = translation;
+            } else {
+                element.innerHTML = translation;
+            }
+        }
+    });
+    
+    // Update meta tags
+    const metaTitle = translations[lang]?.metaTitle;
+    const metaDescription = translations[lang]?.metaDescription;
+    const metaKeywords = translations[lang]?.metaKeywords;
+    
+    if (metaTitle) {
+        document.title = metaTitle;
+        const titleMeta = document.querySelector('title[data-lang="metaTitle"]');
+        if (titleMeta) titleMeta.textContent = metaTitle;
+    }
+    
+    if (metaDescription) {
+        const descMeta = document.querySelector('meta[name="description"]');
+        if (descMeta) descMeta.setAttribute('content', metaDescription);
+    }
+    
+    if (metaKeywords) {
+        const keywordsMeta = document.querySelector('meta[name="keywords"]');
+        if (keywordsMeta) keywordsMeta.setAttribute('content', metaKeywords);
+    }
+    
+    console.log('Language set to:', lang);
 }
 
 /* =========================================================
