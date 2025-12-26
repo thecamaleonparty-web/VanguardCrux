@@ -73,7 +73,7 @@ function initProjectSwiper() {
     // Inicializar estado de botones y paginación
     function updatePagination() {
         pagination.querySelectorAll('.swiper-pagination-bullet').forEach((b, i) => {
-            b.classList.toggle('.swiper-pagination-bullet-active', i === currentSlide);
+            b.classList.toggle('swiper-pagination-bullet-active', i === currentSlide);
         });
     }
 
