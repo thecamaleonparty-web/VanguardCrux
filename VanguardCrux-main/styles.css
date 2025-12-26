@@ -591,6 +591,12 @@ input:focus, textarea:focus {
     }
 }
 
+@media (min-width: 1024px) {
+    .swiper-slide {
+        flex: 0 0 33.333333%;
+    }
+}
+
 .swiper-pagination {
     display: flex;
     justify-content: center;

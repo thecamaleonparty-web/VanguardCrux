@@ -64,11 +64,20 @@ function initProjectSwiper() {
         } else if (viewportWidth < 1024) {
             return 2; // 2 slides por pantalla en tablets/medianos
         } else {
-            return 2; // 2 slides por pantalla en pantallas grandes
+            return 3; // 3 slides por pantalla en pantallas grandes
         }
     }
 
     let slidesPerView = updateSlidesPerView();
+
+    // Create pagination bullets
+    pagination.innerHTML = '';
+    for (let i = 0; i < totalSlides; i++) {
+        const bullet = document.createElement('div');
+        bullet.className = 'swiper-pagination-bullet';
+        bullet.addEventListener('click', () => goToSlide(i));
+        pagination.appendChild(bullet);
+    }
 
     // Inicializar estado de botones y paginación
     function updatePagination() {
@@ -113,13 +122,8 @@ function initProjectSwiper() {
     // Configuración inicial
     goToSlide(0);
 
-    // Auto-slide en móviles, solo una vez
-    if (window.innerWidth < 768) {
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            goToSlide(currentSlide);
-        }, 5000);
-    }
+    // Removed auto-slide on mobile to allow users to read content
+    // Users can navigate using swipe or navigation buttons
 
     // Recalcular vistas por pantalla al redimensionar
     window.addEventListener('resize', () => {
