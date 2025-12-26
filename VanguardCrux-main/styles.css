@@ -577,6 +577,7 @@ input:focus, textarea:focus {
 
 .swiper-wrapper {
     display: flex;
+    flex-wrap: nowrap;
     transition: transform 0.3s ease;
 }
 
@@ -1188,7 +1189,7 @@ input:focus, textarea:focus {
 }
 
 /* Ajustar contenedor grid de tarjetas */
-.grid.md\:grid-cols-3, .swiper-wrapper {
+.grid.md\:grid-cols-3 {
     display: grid; /* Usar diseño grid */
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); /* Ajustar tamaño proporcional */
     gap: 1.5rem; /* Espaciado entre tarjetas */
