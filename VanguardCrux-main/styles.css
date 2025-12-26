@@ -585,7 +585,7 @@ input:focus, textarea:focus {
     padding: 0 1rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
     .swiper-slide {
         flex: 0 0 50%;
     }
