@@ -514,7 +514,6 @@ const translations = {
 /* =========================================================
    LANGUAGE SWITCHER
    ========================================================= */
-   ========================================================= */
 
 function detectBrowserLanguage() {
     // Get saved language from localStorage
