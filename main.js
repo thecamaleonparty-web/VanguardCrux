@@ -179,6 +179,9 @@ if (menuBtn) {
    TRANSLATIONS
    ========================================================= */
 
+// Pages with separate language-specific HTML files
+const PAGES_WITH_LANGUAGE_VERSIONS = ['kultur-atelier', 'privacy-policy', 'terms', 'cookies'];
+
 const translations = {
     en: {
         // Navigation
@@ -629,13 +632,10 @@ function setLanguage(lang) {
     
     // Check if current page has language-specific versions
     const currentPath = window.location.pathname;
-    const currentFile = currentPath.split('/').pop();
-    
-    // List of pages with separate language versions
-    const pagesWithLanguageVersions = ['kultur-atelier', 'privacy-policy', 'terms', 'cookies'];
+    const currentFile = currentPath.replace(/\/$/, '').split('/').pop() || '';
     
     // Check if we're on a page with language versions
-    for (const basePage of pagesWithLanguageVersions) {
+    for (const basePage of PAGES_WITH_LANGUAGE_VERSIONS) {
         // Match patterns like "kultur-atelier.html", "kultur-atelier-es.html", "kultur-atelier-pt.html"
         if (currentFile.startsWith(basePage)) {
             const suffix = lang === 'en' ? '' : `-${lang}`;
