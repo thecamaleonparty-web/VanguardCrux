@@ -627,6 +627,29 @@ function setLanguage(lang) {
     // Save to localStorage
     localStorage.setItem('userLanguage', lang);
     
+    // Check if current page has language-specific versions
+    const currentPath = window.location.pathname;
+    const currentFile = currentPath.split('/').pop();
+    
+    // List of pages with separate language versions
+    const pagesWithLanguageVersions = ['kultur-atelier', 'privacy-policy', 'terms', 'cookies'];
+    
+    // Check if we're on a page with language versions
+    for (const basePage of pagesWithLanguageVersions) {
+        // Match patterns like "kultur-atelier.html", "kultur-atelier-es.html", "kultur-atelier-pt.html"
+        if (currentFile.startsWith(basePage)) {
+            const suffix = lang === 'en' ? '' : `-${lang}`;
+            const newFile = `${basePage}${suffix}.html`;
+            
+            // Only redirect if we're changing to a different file
+            if (currentFile !== newFile) {
+                window.location.href = newFile;
+                return; // Exit early since we're redirecting
+            }
+            break;
+        }
+    }
+    
     // Update active button state in all language switchers
     document.querySelectorAll('.language-switcher').forEach(switcher => {
         switcher.querySelectorAll('.language-btn').forEach(btn => {
