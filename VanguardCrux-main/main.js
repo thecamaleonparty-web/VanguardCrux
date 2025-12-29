@@ -548,6 +548,20 @@ function setLanguage(lang) {
     // Save to localStorage
     localStorage.setItem('userLanguage', lang);
     
+    // Check if we're on a page with language-specific versions
+    const currentPage = window.location.pathname.split('/').pop();
+    const pageBase = currentPage.replace(/-(es|pt)\.html$/, '.html').replace(/\.html$/, '');
+    
+    // List of pages with language-specific versions
+    const multiLangPages = ['kultur-atelier', 'privacy-policy', 'terms', 'cookies'];
+    
+    if (multiLangPages.includes(pageBase)) {
+        // Navigate to the appropriate language version
+        const suffix = lang === 'en' ? '' : `-${lang}`;
+        window.location.href = `${pageBase}${suffix}.html`;
+        return; // Exit early as we're navigating away
+    }
+    
     // Update active button state in all language switchers
     document.querySelectorAll('.language-switcher').forEach(switcher => {
         switcher.querySelectorAll('.language-btn').forEach(btn => {

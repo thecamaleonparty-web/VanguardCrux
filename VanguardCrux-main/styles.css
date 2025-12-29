@@ -27,6 +27,7 @@ body {
 /* Utility Classes */
 .bg-dark { background-color: var(--bg-dark); }
 .bg-light-navy { background-color: var(--bg-light-navy); }
+.bg-accent { background-color: var(--accent); }
 .text-light { color: var(--text-light); }
 .text-accent { color: var(--accent); }
 .text-lightest { color: var(--text-lightest); }
