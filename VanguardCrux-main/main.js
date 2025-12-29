@@ -549,7 +549,8 @@ function setLanguage(lang) {
     localStorage.setItem('userLanguage', lang);
     
     // Check if we're on a page with language-specific versions
-    const currentPage = window.location.pathname.split('/').pop();
+    const pathname = window.location.pathname;
+    const currentPage = pathname.split('/').filter(Boolean).pop() || 'index.html';
     const pageBase = currentPage.replace(/-(es|pt)\.html$/, '.html').replace(/\.html$/, '');
     
     // List of pages with language-specific versions
