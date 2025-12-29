@@ -179,6 +179,9 @@ if (menuBtn) {
    TRANSLATIONS
    ========================================================= */
 
+// Pages with separate language-specific HTML files
+const PAGES_WITH_LANGUAGE_VERSIONS = ['kultur-atelier', 'privacy-policy', 'terms', 'cookies'];
+
 const translations = {
     en: {
         // Navigation
@@ -626,6 +629,26 @@ function setLanguage(lang) {
     
     // Save to localStorage
     localStorage.setItem('userLanguage', lang);
+    
+    // Check if current page has language-specific versions
+    const currentPath = window.location.pathname;
+    const currentFile = currentPath.replace(/\/$/, '').split('/').pop() || '';
+    
+    // Check if we're on a page with language versions
+    for (const basePage of PAGES_WITH_LANGUAGE_VERSIONS) {
+        // Match patterns like "kultur-atelier.html", "kultur-atelier-es.html", "kultur-atelier-pt.html"
+        if (currentFile.startsWith(basePage)) {
+            const suffix = lang === 'en' ? '' : `-${lang}`;
+            const newFile = `${basePage}${suffix}.html`;
+            
+            // Only redirect if we're changing to a different file
+            if (currentFile !== newFile) {
+                window.location.href = newFile;
+                return; // Exit early since we're redirecting
+            }
+            break;
+        }
+    }
     
     // Update active button state in all language switchers
     document.querySelectorAll('.language-switcher').forEach(switcher => {
