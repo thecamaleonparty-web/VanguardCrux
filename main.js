@@ -180,7 +180,7 @@ if (menuBtn) {
    ========================================================= */
 
 // Pages with separate language-specific HTML files
-const PAGES_WITH_LANGUAGE_VERSIONS = ['kultur-atelier', 'privacy-policy', 'terms', 'cookies'];
+const PAGES_WITH_LANGUAGE_VERSIONS = ['kultur-atelier', 'fintech-case', 'privacy-policy', 'terms', 'cookies'];
 
 const translations = {
     en: {
@@ -318,6 +318,10 @@ const translations = {
     exploreMoreTitle: "Explore More Projects",
     exploreMoreDesc: "Discover how we transform brands into memorable experiences",
     viewAllCases: "View All Case Studies",
+
+    // Fintech Case Study Detail Page
+    fintechMetaTitle: "Business Case Analyzer Pro Case Study | Vanguard Crux",
+    fintechMetaDesc: "Algorithmic financial modeling architecture with zero-latency NPV, ROI, and IRR calculations. AI-ready fintech SaaS built with Vanilla JS.",
 
     footerRights: "© 2024 Vanguard Crux. All rights reserved."
   },
@@ -463,6 +467,10 @@ const translations = {
     exploreMoreDesc: "Descubre cómo transformamos marcas en experiencias memorables",
     viewAllCases: "Ver Todos los Casos",
 
+    // Fintech Case Study Detail Page
+    fintechMetaTitle: "Caso de Estudio Business Case Analyzer Pro | Vanguard Crux",
+    fintechMetaDesc: "Arquitectura de modelado financiero algorítmico con cálculos de VPN, ROI y TIR de latencia cero. Fintech SaaS AI-ready construido con Vanilla JS.",
+
     // Footer
     footerRights: "© 2024 Vanguard Crux. Todos los derechos reservados."
     },
@@ -601,6 +609,10 @@ const translations = {
     exploreMoreTitle: "Explorar Mais Projetos",
     exploreMoreDesc: "Descobre como transformamos marcas em experiências memoráveis",
     viewAllCases: "Ver Todos os Projetos",
+
+    // Fintech Case Study Detail Page
+    fintechMetaTitle: "Estudo de Caso Business Case Analyzer Pro | Vanguard Crux",
+    fintechMetaDesc: "Arquitetura de modelagem financeira algorítmica com cálculos de VPL, ROI e TIR de latência zero. Fintech SaaS AI-ready construído com Vanilla JS.",
 
     footerRights: "© 2024 Vanguard Crux. Todos os direitos reservados."
   }
@@ -744,6 +756,22 @@ function initKulturAtelierCard() {
 }
 
 /* =========================================================
+   FINTECH CASE CARD CLICK HANDLER
+   ========================================================= */
+
+function initFintechCaseCard() {
+    document.querySelectorAll('.fintech-case-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const currentLang = localStorage.getItem('userLanguage') || 'en';
+            let targetPage = 'fintech-case.html';
+            if (currentLang === 'es') targetPage = 'fintech-case-es.html';
+            if (currentLang === 'pt') targetPage = 'fintech-case-pt.html';
+            window.location.href = targetPage;
+        });
+    });
+}
+
+/* =========================================================
    INIT
    ========================================================= */
 
@@ -752,6 +780,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initProjectSwiper();
     initLegalLinks();
     initKulturAtelierCard();
+    initFintechCaseCard();
 
     const detectedLang = detectBrowserLanguage();
 
